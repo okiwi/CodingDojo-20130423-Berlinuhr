@@ -6,7 +6,20 @@
  */
  
 body{
-background: #dedede; 
+margin: 0px;
+font-family: 'Ubuntu', sans-serif;
+font-size: 15px;
+text-align: justify;
+
+background: #F0EBE8; 
 color: #2a2a2a;
 padding-top: 60px;
+}
+
+#nom{
+color: #DE2E14;
+}
+
+#prenom{
+color: #fff;
 }

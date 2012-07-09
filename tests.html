@@ -5,8 +5,8 @@
 		<meta name="description" content="">
 		<meta name="author" content="">
 
-		<title>html_js.tdd.start( )</title>
-
+		<title>html_js.tdd.tests( )</title>
+		
 		<!-- tests... -->
 		<link rel="stylesheet" type="text/css" href="lib/jasmine-1.2.0/jasmine.css">
 		<script type="text/javascript" src="lib/jasmine-1.2.0/jasmine.js"></script>
@@ -14,14 +14,42 @@
 
 		<script type="text/javascript" src="js/spec/example.js"></script>
 		<script type="text/javascript" src="js/src/example.js"></script>
-
+		
 		<!-- design... -->
 		<link href="css/bootstrap.css" rel="stylesheet" type="text/css">
 		<link href="css/rainbow.css" rel="stylesheet" type="text/css">
 		<link href="css/style.css" rel="stylesheet" type="text/css">
 		
 		<link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
+		
+		<script type="text/javascript">
+			(function() {
+				var jasmineEnv = jasmine.getEnv();
+				jasmineEnv.updateInterval = 1000;
 
+				var htmlReporter = new jasmine.HtmlReporter();
+
+				jasmineEnv.addReporter(htmlReporter);
+
+				jasmineEnv.specFilter = function(spec) {
+					return htmlReporter.specFilter(spec);
+				};
+
+				var currentWindowOnload = window.onload;
+
+				window.onload = function() {
+					if (currentWindowOnload) {
+						currentWindowOnload();
+					}
+					execJasmine();
+				};
+
+				function execJasmine() {
+					jasmineEnv.execute();
+				}
+
+			})();
+		</script>
 	</head>
 
 	<body>
@@ -36,20 +64,12 @@
 			  <a class="brand" href="#"><span class="red">red</span> <span class="green">green</span> & <span class="refactor">refactor</span></a>
 			  <div class="nav-collapse">
 				<ul class="nav">
-				  <li class="active"><a href="index.html"><i class="icon-pencil icon-white"></i> code</a></li>
-				  <li><a href="tests.html"><i class="icon-ok icon-white"></i> tests</a></li>
+				  <li><a href="index.html"><i class="icon-pencil icon-white"></i> code</a></li>
+				  <li class="active"><a href="tests.html"><i class="icon-ok icon-white"></i> tests</a></li>
 				</ul>
 			  </div><!--/.nav-collapse -->
 			</div>
 		  </div>
-		</div>
-
-		<div class="container-fluid">
-			<pre><script>document.write(render_number(1))</script></pre>
-			<pre><script>document.write(render_number(12))</script></pre>
-			<pre><script>document.write(render_number(8))</script></pre>	
-			<pre><script>document.write(render_number(1278))</script></pre>	
-			<pre><script>document.write(render_number(1023456789))</script></pre>
 		</div>
 		
 		<!-- jquery -->

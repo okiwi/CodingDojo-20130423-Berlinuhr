@@ -16,10 +16,14 @@ color: #2a2a2a;
 padding-top: 60px;
 }
 
-#nom{
-color: #DE2E14;
+.red{
+color: #c41200;
 }
 
-#prenom{
+.green{
+color: #30a72f;
+}
+
+.refactor{
 color: #fff;
 }

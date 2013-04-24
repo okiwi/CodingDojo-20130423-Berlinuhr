@@ -1,43 +1,63 @@
-describe("Example LCD", function() {
-  it("renders 1", function() {
-    assert_render('   \n' +
-                  '  |\n' +
-                  '  |\n', 1);
-  });
-  
-  it("renders 2", function() {
-    assert_render(' _ \n' +
-                  ' _|\n' +
-                  '|_ \n', 2);
-  });
-  
-  it("renders 8", function() {
-    assert_render(' _ \n' +
-                  '|_|\n' +
-                  '|_|\n', 8);
-  });
-  
-  it("renders 7", function() {
-    assert_render(' _ \n' +
-                  '  |\n' +
-                  '  |\n', 7);
-  });
+describe('Berlinuhr', function(){
+  beforeEach(function(){
+    this.berlinuhr = new Berlinuhr()
+  })
 
-  it("renders 12", function() {
-    assert_render('    _ \n' +
-                  '  | _|\n' +
-                  '  ||_ \n', 12);
-  });
-  it("renders 02", function() {
-    assert_render(' _  _ \n' +
-                  '| | _|\n' +
-                  '|_||_ \n', '02');
-  });
- // 1 = { 0-0-0 / 0-0-1 / 0-0-1 }
-  
-  function assert_render(res, num) {
-	  expect(render_number(num)).toEqual(res);
-  }
+  describe('#getSeconds', function(){
+    describe('initialized with an even seconds number', function(){
 
+      beforeEach(function(){
+        this.berlinuhr.setTime('12:34:56')
+      })
 
-});
+      it('should display seconds', function(){
+        expect(this.berlinuhr.getSeconds()).toBe('Y')
+      })
+
+    })
+
+    describe('initialized with an odd seconds number', function(){
+
+      beforeEach(function(){
+        this.berlinuhr.setTime('12:34:55')
+      })
+
+      it('should display seconds', function(){
+        expect(this.berlinuhr.getSeconds()).toBe('O')
+      })
+
+    })
+  })
+
+  describe('#getHours', function(){
+    describe('initialized with 5 A.M.', function(){
+
+      beforeEach(function(){
+      })
+
+      it('should display hours on two lines', function(){
+        this.berlinuhr.setTime('05:00:00')
+        expect(this.berlinuhr.getHours())
+          .toEqual(['ROOO','OOOO'])
+      })
+
+      it('should display hours on two lines', function(){
+
+        this.berlinuhr.setTime('06:00:00')
+        expect(this.berlinuhr.getHours())
+          .toEqual(['ROOO','ROOO'])
+      })
+
+    })
+  })
+  describe('#getMinutes', function(){
+    describe('initialized with 05:16:00', function() {
+      it('should display minutes', function() {
+        this.berlinuhr.setTime('05:16:00')
+        expect(this.berlinuhr.getMinutes()).toEqual(
+            ['YYROOOOOOOO', 'YOOO']
+          )
+      })
+    })
+  })
+})

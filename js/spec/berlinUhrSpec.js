@@ -60,4 +60,34 @@ describe('Berlinuhr', function(){
       })
     })
   })
+  
+  describe('#setTime', function(){
+    it('should return valid Date.get* segments', function() {
+        this.berlinuhr.setTime('13:37:42')
+        expect(this.berlinuhr.timeObj.getHours()).toEqual(13)
+        expect(this.berlinuhr.timeObj.getMinutes()).toEqual(37)
+        expect(this.berlinuhr.timeObj.getSeconds()).toEqual(42)
+    })  
+  })
+  
+  /*
+  describe('#setTime invalid hour segments', function(){
+    it('should throw invalid hour error', function() {
+        expect(this.berlinuhr.setTime('24:00:00')).toThrow('invalid time segment: hour')
+    })
+  });
+  
+  describe('#setTime invalid minute segments', function(){
+    it('should throw invalid minute error', function() {
+        expect(this.berlinuhr.setTime('00:60:00')).toThrow('invalid time segment: minute')
+    })
+  });
+  
+  describe('#setTime invalid second segments', function(){
+    it('should throw invalid hour error', function() {
+        expect(this.berlinuhr.setTime('00:00:60')).toThrow('invalid time segment: second')
+    })
+  })
+  */
+
 })

@@ -13,7 +13,6 @@ describe('Berlinuhr', function(){
       it('should display seconds', function(){
         expect(this.berlinuhr.getSeconds()).toBe('Y')
       })
-
     })
 
     describe('initialized with an odd seconds number', function(){
@@ -70,24 +69,37 @@ describe('Berlinuhr', function(){
     })  
   })
   
-  /*
+
   describe('#setTime invalid hour segments', function(){
     it('should throw invalid hour error', function() {
-        expect(this.berlinuhr.setTime('24:00:00')).toThrow('invalid time segment: hour')
+        expect(this.berlinuhr.setTime.bind(this.berlinuhr, '24:00:00')).toThrow()
     })
   });
   
   describe('#setTime invalid minute segments', function(){
     it('should throw invalid minute error', function() {
-        expect(this.berlinuhr.setTime('00:60:00')).toThrow('invalid time segment: minute')
+        expect(this.berlinuhr.setTime.bind(this.berlinuhr, '00:60:00')).toThrow()
     })
   });
   
   describe('#setTime invalid second segments', function(){
     it('should throw invalid hour error', function() {
-        expect(this.berlinuhr.setTime('00:00:60')).toThrow('invalid time segment: second')
+        expect(this.berlinuhr.setTime.bind(this.berlinuhr, '00:00:60')).toThrow()
     })
   })
-  */
 
+  describe('#setTime can accept a Date object', function(){
+    it('should return the time we gave it', function() {
+        var d = new Date()
+        d.setHours(0,0,1)
+        this.berlinuhr.setTime(d)
+        expect(this.berlinuhr.timeObj.getSeconds()).toBe(1)
+    })
+  })
+  describe('#setTime can accept a Date object, but not just any object', function(){
+    it('should return the time we gave it', function() {
+        var o = {}
+        expect(this.berlinuhr.setTime.bind(this.berlinuhr, o)).toThrow()
+    })
+  })
 })

@@ -4,10 +4,13 @@ function Berlinuhr (){
 Berlinuhr.prototype = {}
 
 Berlinuhr.prototype.setTime = function(time){
-    this.time = time
-    var timeSeg = this.validateTimeString(time);
-    this.timeObj = new Date();
-    this.timeObj.setHours(timeSeg[0], timeSeg[1], timeSeg[2])
+    if(typeof time === 'object' && time.setHours){
+        this.timeObj = time;
+    }else{
+        var timeSeg = this.validateTimeString(time);
+        this.timeObj = new Date();
+        this.timeObj.setHours(timeSeg[0], timeSeg[1], timeSeg[2])
+    }
 }
 
 Berlinuhr.prototype.validateTimeString = function(time){

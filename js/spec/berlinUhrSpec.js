@@ -88,6 +88,8 @@ describe('Berlinuhr', function(){
     })
   })
 
+>>>>>>> a85672d1fee04ab77a662db7e716c2509cd03b0e
+
   describe('#setTime can accept a Date object', function(){
     it('should return the time we gave it', function() {
         var d = new Date()

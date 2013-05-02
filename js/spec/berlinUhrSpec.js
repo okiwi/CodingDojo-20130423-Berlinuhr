@@ -102,4 +102,13 @@ describe('Berlinuhr', function(){
         expect(this.berlinuhr.setTime.bind(this.berlinuhr, o)).toThrow()
     })
   })
+  
+  describe('#getTime returns correctly formatted time', function(){
+    it('should return "Y\nROOO\nROOO\nYYROOOOOOOO\nYOOO"', function(){
+        var d = new Date()
+        d.setHours(6,16,0)
+        this.berlinuhr.setTime(d)
+        expect(this.berlinuhr.getTime()).toBe('Y\nROOO\nROOO\nYYROOOOOOOO\nYOOO')
+    })
+  })
 })

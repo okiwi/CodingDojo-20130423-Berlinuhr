@@ -80,3 +80,12 @@ Berlinuhr.prototype.getMinutes = function(){
 }
 
 
+Berlinuhr.prototype.getTime = function(){
+    var segments = []
+    var hours, minutes, seconds
+    hours = this.getHours()
+    minutes = this.getMinutes()
+    seconds = this.getSeconds()
+    var time = segments.concat(seconds, hours, minutes);
+    return time.join('\n');
+}

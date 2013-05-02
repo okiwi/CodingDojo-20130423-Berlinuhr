@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="description" content="">
+		<meta name="author" content="">
+
+		<title>BerlinUhr</title>
+		
+
+		
+		<!-- design... -->
+		<link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+		<link href="css/rainbow.css" rel="stylesheet" type="text/css">
+		<link href="css/style.css" rel="stylesheet" type="text/css">
+		
+		<link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
+
+		<script type="text/javascript" src="js/src/berlinUhr.js"></script>
+		
+	</head>
+
+	<body>
+        <pre id="clock" style="width:200px;height:100px;border:solid 1px black;padding: 10px;"></pre>
+        <div id="status"></div>
+        <button id="stopBtn">...</button>
+	</body>
+    <script type="text/javascript">
+        (function() {
+            
+            var getClockTime = function(){
+                var time = new Date();
+                var clock = new Berlinuhr();
+                clock.setTime(time);
+                return clock.getTime();
+            }
+            
+            var tick = 0;
+            
+            var displayTime = function(time){
+                var elm = document.getElementById('clock');
+                elm.innerHTML = time;
+                var status = document.getElementById('status');
+                if(tick === 0)status.innerHTML = '';
+                tick += 1;
+                status.innerHTML = 'clock running (tick ' + tick + ')';
+            };
+            
+            
+            
+            var registerStopButton = function(interval){
+                var btn = document.getElementById('stopBtn');
+                btn.innerHTML = 'stop';
+                var status = document.getElementById('status');
+                status.innerHTML = 'btn ready';
+                btn.onclick = handleBtnClick;
+                
+            }
+            var timer;
+            var handleBtnClick = function (){
+                var btn = document.getElementById('stopBtn');
+                var text = btn.innerHTML;
+                if (text === 'stop'){
+                    btn.innerHTML = 'stopped';
+                    window.clearInterval(timer);
+                }else{
+                    timer = window.setInterval(function () {displayTime(getClockTime())}, 999);
+                    btn.innerHTML = 'stop';
+                }
+            }
+            
+            var curWinOnload = window.onload;
+            window.onload = function(){
+                if(curWinOnload){
+                    curWinOnload();
+                }
+                timer = window.setInterval(function () {displayTime(getClockTime())}, 999);
+                registerStopButton(timer);
+            }
+            
+            })();
+        
+    </script>
+</html>
